@@ -1,0 +1,27 @@
+looking for strings showed in the the output when we run the program
+----function FUN_00401108 have these strings "Your grades this semester were really"
+--------lets call it main
+--------function FUN_00400f1a have script for option 1 view grades
+--------function FUN_00400fd5 have script for option 2 edit average
+------------in this function we have a array(local_118) of length 33
+------------we are storing values in the array with scanf function and the number of values are not restricted by any checks
+
+┌──(ayush㉿kali)-[~/…/HackTheBox/Challenges/PWN/Bad Grades]
+└─$ checksec --file ./libc.so.6                  
+[*] '/home/ayush/Work/HackTheBox/Challenges/PWN/Bad Grades/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+                                                                  
+┌──(ayush㉿kali)-[~/…/HackTheBox/Challenges/PWN/Bad Grades]
+└─$ checksec --file ./bad_grades 
+[*] '/home/ayush/Work/HackTheBox/Challenges/PWN/Bad Grades/bad_grades'
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+  0x40106d:	shl    rdx,0x3
+ 

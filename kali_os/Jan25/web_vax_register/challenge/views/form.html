@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>COVID-19 VACCINE PRE-REGISTRATION</title>
+        <link rel="icon" href="/static/images/favicon.png" />
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">COVID-19 VACCINE PRE-REGISTRATION SYSTEM</a>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+              <ul class="navbar-nav me-auto">
+                <span class="navbar-text">Logged in as ({{ formData.username }}), </span>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        {% if adminStats %}
+            <div class="stats-container">
+                <div class="container">
+                     <canvas id="myChart" width="600px" height="400px"></canvas>
+                </div>
+                <p>{{ adminStats.flag }}</p>
+            </div>
+        {% endif %}
+        <div class="auth-container"><br>
+            <p id="auth-p1">COVID-19 VACCINE PRE-REGISTRATION FORM</p>
+            <div class="covid-form">
+                <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name" class="form-control" value="{{ formData.full_name }}"/> 
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phone">phone</label>
+                    <input type="text" id="phone" class="form-control"  value="{{ formData.phone }}"/> 
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="birth_date">Birth Date</label>
+                        <input type="date" id="birth_date" class="form-control" value="{{ formData.birth_date }}"/> 
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="gender">Gender</label>
+                        <div class="col-sm-10">
+                            <input type="hidden" id="gender_" value="{{ formData.gender }}">
+                            <div class="form-check-inline">
+                              <input class="form-check-input" type="radio" name="genderRadios" id="gender_male" value="male" checked="">
+                              <label class="form-check-label" for="gender_male">
+                                Male
+                              </label>
+                            </div>
+                            <div class="form-check-inline">
+                              <input class="form-check-input" type="radio" name="genderRadios" id="gender_female" value="female">
+                              <label class="form-check-label" for="gender_female">
+                                Female
+                              </label>
+                            </div>
+                            <div class="form-check-inline">
+                              <input class="form-check-input" type="radio" name="genderRadios" id="gender_other" value="other">
+                              <label class="form-check-label" for="gender_other">
+                                Other
+                              </label>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="address_1">Address</label>
+                        <input type="text" id="address_1" class="form-control" value="{{ formData.address_1 }}"/> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="address_2">Address 2</label>
+                        <input type="text" id="address_2" class="form-control" value="{{ formData.address_2 }}"/> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="city">city</label>
+                        <input type="text" id="city" class="form-control" value="{{ formData.city }}"/>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="state">state</label>
+                        <input type="text" id="state" class="form-control" value="{{ formData.state }}"/> 
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="zip">zip</label>
+                        <input type="text" id="zip" class="form-control" value="{{ formData.zip }}"/>
+                    </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="health_issues">Do you have any chronic health condition?</label>
+                        <textarea id="health_issues" class="form-control" placeholder="Type here...">{{ formData.health_issues }}</textarea> <br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="symptoms">Please list down if you have any COVID-19 symptoms</label>
+                        <input type="text" id="symptoms" class="form-control" value="{{ formData.symptoms }}"/> 
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="form-group col">  
+                        <label for="allergies">Please list down your allergies</label>
+                        <input type="text" id="allergies" class="form-control" value="{{ formData.allergies }}"/> 
+                    </div>
+                </div> 
+                <label for="c19_diagnosed">Have you been diagnosed with COVID-19?</label>
+                <div class="col-sm-10">
+                    <input type="hidden" id="c19_diagnosed_" value="{{ formData.c19_diagnosed }}">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="covidRadios" id="c19_diagnosed_yes" value="yes" checked>
+                      <label class="form-check-label" for="c19_diagnosed_yes">
+                        Yes
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="covidRadios" id="c19_diagnosed_no" value="no">
+                      <label class="form-check-label" for="c19_diagnosed_no">
+                        No
+                      </label>
+                    </div>
+                </div>
+                <div class="submit-btns">
+                    <button type="button" id="submit-btn" class="btn btn-primary">Submit</button>
+                </div>
+                <p id="resp-msg" class="alert alert-info">Please wait...</p>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/static/js/jquery-3.6.0.slim.min.js"></script>
+    <script type="text/javascript" src="/static/js/form.js"></script>
+    <script type="text/javascript" src="/static/js/chart.min.js"></script>
+    <script type="text/javascript" src="/static/js/chartjs-plugin-datalabels.js"></script>
+    <script type="text/javascript">
+        
+        var canvas = document.getElementById('myChart');
+        if(canvas){
+            var ctx = canvas.getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Total Applicants', 'Total Diagnosed'],
+                    datasets: [{
+                        data: [ {{ adminStats.total_applications }} , {{ adminStats.total_diagnosed }}],
+                        backgroundColor: ['#00e676', '#e91e63'],
+                        borderWidth: 0.5 ,
+                        borderColor: '#ddd'
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 20,
+                                fontColor: '#111',
+                                padding: 15
+                            }
+                        },
+                        tooltips: {
+                            enabled: true
+                        },
+                        title: {
+                            display: true,
+                            text: 'Application Statistics',
+                            position: 'top',
+                            fontSize: 16,
+                            fontColor: '#111',
+                            padding: 20
+                        },
+                        datalabels: {
+                            color: '#111',
+                            textAlign: 'center',
+                            font: {
+                                lineHeight: 1.6
+                            },
+                            formatter: function(value, ctx) {
+                                return ctx.chart.data.labels[ctx.dataIndex] + '\n' + value + '%';
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+
+    </script>
+</html>

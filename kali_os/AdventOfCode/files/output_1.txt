@@ -1,0 +1,2 @@
+Max calories: 70720
+Top three calories sum: 207148

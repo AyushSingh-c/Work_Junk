@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+ body {
+    font-family: 'Source Sans Pro', cursive;
+     font-size: 18pt;
+     color: #0752c9;
+     background-color: #e5e5e5;
+     height: 100%;
+     overflow: hidden;
+     min-height: 800px;
+     max-height: 800px;
+}
+
+.a-cap {
+    color: #3498db;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+label {
+    text-transform: uppercase;
+    font-size: 19px;
+    font-weight: bold;
+    color: #3498db;
+}
+ p {
+     text-align: center;
+     margin: 0 auto;
+}
+ .main-logo {
+     display: flex;
+     /*! min-width: 350px; */
+     width: 272px;
+     margin: 0 auto;
+     margin-top: 2rem;
+     margin-bottom: 20px;
+}
+ .login-form {
+     display: flex;
+     min-width: 400px;
+     width: 400px;
+     margin: 0 auto;
+     margin-top: 20px;
+     flex-direction: column;
+}
+ .login-form>input {
+     margin-bottom: 1.5rem;
+}
+ .submit-btns {
+     text-align: center;
+}
+ .submit-btns>button {
+     width: 45%;
+}
+ .submit-btn.is-primary {
+     background-color: #7aaadb !important;
+     border-color: #0752c9 !important;
+}
+ .submit-btn.is-primary::after {
+     box-shadow:inset -4px -4px #a86136 !important;
+}
+ .submit-btn.is-primary:hover::after {
+     box-shadow:inset -6px -6px #353535 !important;
+}
+ .submit-btn.is-primary:focus {
+     box-shadow:0 0 0 3px transparent !important;
+}
+
+.fw-15 {
+    font-size: 15px;
+}
+
+/* query-msg */
+
+ #resp-msg {
+     display: none;
+     margin-top: 1.5rem; 
+     padding: 6px 15px;
+     font-size: 18px;
+}
+
+
+.login-frame {
+    position: relative;
+    background-color: #fbfbfb;
+    padding: 30px 10px;
+    width: 480px;
+    margin: 0 auto;
+    padding-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    box-shadow: 2px 2px 5px #93a5b7;
+}
+
+
+.pb-3 {
+    display: block;
+    padding-bottom: 30px;
+}
+
+@media (max-width: 600px){
+    .decorate {
+        display: none;
+    }
+    #fireplace {
+        display: none;
+    }
+}
+
+@media (max-width: 1100px){
+    #fireplace {
+        display: none;
+    }
+}
+
+@media (max-height: 900px){
+    body {
+        overflow: scroll;
+    }
+    #fireplace {
+        display: none;
+    }
+}

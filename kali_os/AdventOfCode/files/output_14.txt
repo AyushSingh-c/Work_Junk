@@ -1,0 +1,13 @@
+. . . . . . . . . . o . . . . . . . . . 
+. . . . . . . . . o o o . . . . . . . . 
+. . . . . . . . o o o o o . . . . . . . 
+. . . . . . . o o o o o o o . . . . . . 
+. . . . . . o o o o o o o o o . . . . . 
+. . . . . o o o o o o o o o o o . . . . 
+. . . . o o o o o o o o o o o o o . . . 
+. . . o o o o o o o o o o o o o o o . . 
+. . o o o o o o o o o o o o o o o o o . 
+. o o o o o o o o o o o o o o o o o o o 
+o o o o o o o o o o o o o o o o o o o o 
+o o o o o o o o o o o o o o o o o o o o 
+172 27601

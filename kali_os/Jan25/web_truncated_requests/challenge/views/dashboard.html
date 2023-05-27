@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Productivity Requests</title>
+        <link rel="icon" href="/static/images/purchase.png" />
+        <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/auth.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/dashboard.css" />
+    </head>
+    <body>
+        <div class="container">
+            <img src="/static/images/purchase.png" class="main-logo" />
+            <p class="logout-frame"><a href="/logout">Logout</a></p>
+            <div class="d-flex justify-content-between w-100">
+                <div class="d-flex justify-content-start">
+                    <p class="pb-3 a-cap">Welcome back, {{ user.username }}!</p>
+                </div>
+                <button class="btn btn-primary mb-3">New Purchase Request</button>
+            </div>
+            {% if unapproved %}
+            <div class="dash-frame mb-5">
+                <p class="pb-3 a-cap">List of unapproved products for distribution</p>
+                <table class="table table-striped" id="toy-listing">
+                    <tbody>
+                      <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Receiver Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Approved</th>
+                      </tr>
+                      {% for req in unapproved %}
+                      <tr>
+                          <td>{{req.product}}</td>
+                          <td>{{req.receiver}}</td>
+                          <td>{{req.location}}</td>
+                          <td>true</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                {% if user.username != 'admin' %}
+                <p class="nb">Contact HR admin for productivity requests.</p>
+                {% endif %}
+             </div>
+            {% endif %}
+            <div class="dash-frame mb-5">
+                <p class="pb-3 a-cap">List of approved products for distribution</p>
+                <table class="table table-striped" id="toy-listing">
+                    <tbody>
+                      <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Receiver Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Approved</th>
+                      </tr>
+                      {% for req in approved %}
+                      <tr>
+                          <td>{{req.product}}</td>
+                          <td>{{req.receiver}}</td>
+                          <td>{{req.location}}</td>
+                          <td>true</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                {% if user.username != 'admin' %}
+                <p class="nb">Contact HR admin concerning unapproved purchase requests.</p>
+                {% endif %}
+            </div>
+        </div>
+       
+    </body>
+</html>
