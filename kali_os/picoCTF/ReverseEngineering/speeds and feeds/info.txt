@@ -1,0 +1,2 @@
+run in https://filipecaixeta.github.io/cncwebsim/
+Flag - picoCTF{num3r1cal_c0ntr0l_775375c7}

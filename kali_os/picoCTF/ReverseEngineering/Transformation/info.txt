@@ -1,0 +1,17 @@
+this code is used to encode the flag string 
+    ''.join([chr((ord(flag[i]) << 8) + ord(flag[i + 1])) for i in range(0, len(flag), 2)])
+
+For each pair of characters in flag, convert them to their Unicode code points using the ord() function. 
+    For example, ord('a') returns 97.
+For the first character of the pair, perform a bitwise left shift operation by 8 bits using the << operator. 
+    This means moving the bits of the number 8 places to the left, adding zeros at the right end. 
+    For example, ord('a') << 8 returns 24832, which is 97 in binary shifted 8 bits to the left: 01100001 becomes 0110000100000000.
+Add the code point of the second character of the pair to the result of the previous step using the + operator. 
+    For example, (ord('a') << 8) + ord('b') returns 24930, which is 24832 plus 98 (the code point of ‘b’).
+Convert the result back to a character using the chr() function. 
+    For example, chr(24930) returns '瀀', which is a Chinese character.
+Join all the resulting characters into a single string using the ''.join() method.
+
+this is a common method to convert utf-8 strings to utf-16 strings
+
+flag - picoCTF{16_bits_inst34d_of_8_d52c6b93}

@@ -1,0 +1,69 @@
+load and store instructions
+    LDP        W3, W7, [X0]
+        load [X0] into W3, and loads [X0 + 4] into W7:
+    STP        D0, D1, [X4]        
+        stores D0 into [X4] and stores D1 to [X4 + 8]:
+branching instructions
+    B{cond} label 
+        The B instruction is used to branch unconditionally to a label.
+        changes only the instruction pointer
+        without returning back
+    BL{X}{cond} label 
+        The BL instruction copies the address of the next instruction into the link register (LR), and then changes the PC to the address of the label
+        this way it can return back fromt he label execution
+    BLS{cond} label
+        The BLS instruction is used to branch conditionally to a label if the carry flag © is clear and the zero flag (Z) is set. 
+
+
+Understanding func1:
+    cmp	w1, w0
+	bls	.L2
+        means if w1 is leaa than or equal to w0 we ill jump to .L2
+    func1 takes two arguments in registers w0 and w1, which are 32-bit views of the 64-bit registers x0 and x1. It subtracts 16 from the stack pointer (sp) to allocate space for local variables, and stores the arguments in the stack at offsets 12 and 8. It then loads the arguments back into registers w1 and w0, and compares them using the cmp instruction. This instruction sets the condition flags in the status register based on the result of subtracting w0 from w1. It then branches to label .L2 if the lower or same (bls) flag is set, meaning that w1 is less than or equal to w0. Otherwise, it loads w0 with the value of w1, which is the larger argument, and branches to label .L3. At label .L2, it loads w0 with the value of w0, which is the smaller argument. At label .L3, it adds 16 to the stack pointer to deallocate the local variables, and returns to the caller with the return value in register w0. The purpose of this function is to return the maximum of two arguments.
+
+Understanding main:    
+    stp	x29, x30, [sp, -48]! 
+        It subtracts 48 from the current value of SP, and uses that as the target address for storing x29 and x30. 
+        This creates a space of 48 bytes on the stack for the two registers.
+        It stores x29 to the lower 8 bytes of the target address,
+        x30 to the higher 8 bytes of the target address
+        It writes back the new value of SP (the target address) to SP.
+    add	x29, sp, 0
+        [x29] = [sp] + [0]
+    str	x19, [sp, 16]
+        store value in x19 in address sp+16
+    str	w0, [x29, 44]
+        store value of w0 in address x29(which is sp)+44
+    str	x1, [x29, 32]
+        store value of x1 in address x29(which is sp)+32
+    ldr	x0, [x29, 32]
+        load value from the address x29+32(which is x1) to x0
+    add	x0, x0, 8
+        [x0] += 8
+    ldr	x0, [x0]
+        x0 is now the value it was pointing to before
+    bl	atoi
+        takes the argument in x0 and calls the atoi function on this argument
+        returns the result in w0 register
+    mov	w19, w0 
+        move the value from w0 register to w19
+    ldr	x0, [x29, 32]
+        load value from the address x29+32(which is x1) to x0
+    add	x0, x0, 16
+        [x0] += 16
+	ldr	x0, [x0]
+        x0 is now the value it was pointing to before
+	bl	atoi
+        takes the argument in x0 and calls the atoi function on this argument
+        returns the result in w0 register
+    mov	w1, w0
+        move the value from w0 register to w1
+	mov	w0, w19
+        move the value from w19 register to w0
+    bl func1 
+        calls func1
+    
+    main takes two arguments in registers w0 and x1, which are the number of command-line arguments and a pointer to an array of strings containing them, respectively. It stores the frame pointer (x29) and the link register (x30) on the stack, and sets the frame pointer to point to the current stack pointer. It also stores register x19 on the stack at offset 16, as it will be used later. It stores the arguments in the stack at offsets 44 and 32. It then loads register x0 with the second command-line argument (the first one is usually the program name) by adding 8 to the pointer in register x1, and dereferencing it. It then calls the function atoi, which converts a string to an integer, and moves the return value in register w0 to register w19. It then loads register x0 with the third command-line argument by adding 16 to the pointer in register x1, and dereferencing it. It then calls the function atoi, which converts a string to an integer, and moves the return value in register w0 to register w1. It then moves register w0 with the value of register w19, which contains the second command-line argument as an integer, and calls function func1, passing it both integers as arguments. It moves the return value in register w0, which is the minimum of both integers, to register w1. It then loads register x0 with a pointer to a string literal that contains a format specifier for printing a long integer, using an adrp/add pair of instructions to get its address relative to the program counter (pc) or instruction pointer (ip) register. It then calls function printf, passing it both registers as arguments, which prints "Result: %ld\n" followed by the minimum value on standard output. It then moves register w0 with zero, which is usually used as an exit code indicating success, and restores register x19 from the stack at offset 16. It also restores registers x29 and x30 from the stack, and returns to the operating system with register w0 as an exit code. The purpose of this function is to take two command-line arguments as integers, find their minimum using func1, and print it on standard output.
+
+
+Flag - picoCTF{5ee79c2b}
